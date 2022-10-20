@@ -7,7 +7,9 @@
 #
 #
 
+import functions
 
+# ==================== BEGINNING OF FUNCTIONS
 
 def displayMap(m:list):
     print("          =============")
@@ -35,10 +37,19 @@ def checkCoordinates(m:list, l:int, c:int):
             l = int(coord[0])
             c = int(coord[2])
 
+def checkUser(user:str):
+    found=False
+    for l in open("./scores.txt", "a"):
+        player = l[0]
+        print(l[0])
+
 def seeScores():
-    c1, c2, c3 ="", "", ""
+    print(" //===============\\\\")
+    print("||   SCORE BOARD   ||")
+    print(" \\\\===============//")
     for line in open("./scores.txt", "r"):
-        print(line)
+        score = line.split(",")
+        print(">> Player", score[0], ">> Victories:", score[1],"- Games played:", score[2][:-1])
 
 def checkLines(m:list):
     i=0
@@ -93,7 +104,9 @@ def play():
     print("Here's the plateau :")
     displayMap(matrix)
     user1 = str(input("Player 1 - symbol X - Enter your name: "))
+    user1 = functions.upperFirstLetter(user1)
     user2 = str(input("Player 2 - symbol O - Enter your name: "))
+    user2 = functions.upperFirstLetter(user2)
 
     # Write in the score.txt if new player or gamesplayed+=1 if player already known
 
@@ -131,21 +144,24 @@ def play():
         t+=1
 
 
+# ==================== END OF FUNCTIONS
 
 
-mode = int(input("Do you want to play (1) or see scores (2) ? "))
 
+mode = 0
 
-match mode:
-    case 1:
-        print("play")
+while type(mode) is not int or mode != 1 or mode != 2 :
+    mode = input("Do you want to play (1) or see scores (2) ? ")
+    if mode == "1":
+        print("")
         play()
+        break
 
-    case 2:
-        print("see scores")
+    elif mode == "2":
         seeScores()
-    case _:
-        # SEE THE LOOP TO ASK
-        mode = int(input("You didn't enter a valid value\nDo you want to play (1) or see scores (2) ? "))
+        break
+
+    else:
+        print("You didn't enter a valid value")
 
 

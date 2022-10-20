@@ -1,45 +1,85 @@
-def checkLines(m:list):
-    i=0
-    for l in m:
-        if m[i][0] == m[i][1] == m[i][2] and m[i][0] != "-":
-            return (True, i, m[i][0])
+# This function create a substitute to the string.index() method
+def searchLetterInList(letter:str, list:list):
+    i,j = 0,0
+    for l in list:
+        if l == letter:
+            j=i
+            i+=1  
         i+=1
-    return (False, None, None)
+    return j
 
-def checkColumns(m:list):
-    i=0
-    for c in m:
-        if m[0][i] == m[1][i] == m[2][i] and m[0][i] != "-":
-            return (True, i, m[0][i])
+#==============Function UPPER======================
+def myUpper(s:str):
+    upper=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç","À","É","È"]
+    lower=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ç","à","é","è"]
+
+    l = list(s)                         # Place str in a list
+    j=0
+    for letter in l:
+        if letter in lower:
+            i = searchLetterInList(letter, lower)
+            l[j] = upper[i]
+        j+=1
+
+    s2 = ""
+    for e in l:                         # Recreate the str from the list
+        s2 += e
+    return s2
+
+#==============Function LOWER======================
+def myLower(s:str):
+    upper=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç","À","É","È"]
+    lower=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ç","à","é","è"]
+
+    l = list(s)                         # Place str in a list
+    j=0
+    for letter in s:
+        if letter in upper:
+            i=searchLetterInList(letter, upper)
+            l[j] = lower[i]
+        j+=1
+    s2 = ""
+    for e in l:                         # Recreate the str from the list
+        s2 += e                     
+    return s2
+
+def upperFirstLetter(s:str):
+    upper=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç","À","É","È"]
+    lower=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ç","à","é","è"]
+    sep=[" ", ",", ".", ";", "-"]
+
+    l = list(s)                 # Place str in a list
+# Replace the first character & the first character after space by the uppercase
+    i = 0
+    while i+1 <= len(l):
+        if (i == 0 or l[i-1] in sep) and l[i] in lower:
+            l[i]=myUpper[l[i]]
+        elif i > 0:
+            l[i]=myLower(l[i])
+
         i+=1
-    return (False, None, None)
 
-def checkDiagonals(m:list):
-    if m[0][0] == m[1][1] == m[2][2] and m[0][0] != "-":
-        return (True, "1", m[0][0])
-    elif m[0][2] == m[1][1] == m[2][0] and m[0][2] != "-":
-        return (True, "2", m[0][2])
-    else:
-        return (False, None, None)
+    s2 = ""
+    for e in l:                         # Recreate the str from the list
+        s2 += e
+    return s2  
 
-def checkWinner(m:list, player:str):
-    if checkLines(m)[0]:
-        print(player, "WON !!", "3 aligned", checkLines(m)[2], "in the line", checkLines(m)[1])
-        return True
-    elif checkColumns(m)[0]:
-        print(player, "WON !!", "3 aligned", checkColumns(m)[2], "in the column", checkColumns(m)[1])
-        return True
-    elif checkDiagonals(m)[0]:
-        print(player, "WON !!", "3 aligned", checkDiagonals(m)[2], "in the diagonal", checkDiagonals(m)[1])
-        return True
-    else:
-        return False
+def checkUser(user:str):
+    found=False
 
-def displayMap(m:list):
-    print("|============")
-    print("|", m[0][0], "|", m[0][1], "|", m[0][2], "|")
-    print("|===========|")
-    print("|", m[1][0], "|", m[1][1], "|", m[1][2], "|")
-    print("|===========|")
-    print("|",m[2][0], "|", m[2][1], "|", m[2][2], "|")
-    print("============|")
+    with open("./scores.txt", "r+") as f:
+        
+        t=f.read()
+        print(t)
+        d=t.split("\n")
+        print(d)
+
+
+        if user in t:
+            f.seek(0)
+            for i in d:
+                if user not in i and i != "":
+                    f.write(i+"\n")
+            f.write(user+",V,PJ+1\n")
+        
+    
