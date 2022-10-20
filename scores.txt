@@ -1,0 +1,3 @@
+max:3:5
+rodrigue:2:5
+nico:4:5
