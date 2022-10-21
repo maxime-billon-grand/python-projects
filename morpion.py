@@ -4,8 +4,7 @@
 #  [-,-,-]
 #  [-,-,-]]
 #
-#
-#
+
 
 import functions
 
@@ -61,6 +60,27 @@ def userNewGame(user:str):
         else:
             f.write(user+",0,1\n")
 
+def userNewVictory(user:str):
+    with open("./scores.txt", "r+") as f:
+        
+        t=f.read()
+        print(t)
+        listlines=t.split("\n")
+        print(listlines)
+
+        if user in t:
+            f.seek(0)
+            for line in listlines:
+                if user not in line and line != "":
+                    f.write(line+"\n")
+                elif user in line:
+                    victories=str(int(line.split(",")[1])+1)
+                    nbrMatchs=line.split(",")[2]
+                    print("nbrMatchs=",nbrMatchs)
+                    print("victories=",victories)
+
+            f.write(user+","+victories+","+nbrMatchs+"\n")
+
 def seeScores():
     print(" //===============\\\\")
     print("||   SCORE BOARD   ||")
@@ -95,31 +115,35 @@ def checkDiagonals(m:list):
 
 def checkWinner(m:list, player:str):
     if checkLines(m)[0]:
-        print("+++++++++++++")
-        print("++ VICTORY ++")
-        print("+++++++++++++")
+        print("          +++++++++++++")
+        print("          ++ VICTORY ++")
+        print("          VVVVVVVVVVVVV")
+        displayMap(m)
         print(player, "WON !!", "3 aligned", checkLines(m)[2], "in the line", checkLines(m)[1])
+        userNewVictory(player)
         return True
     elif checkColumns(m)[0]:
-        print("+++++++++++++")
-        print("++ VICTORY ++")
-        print("+++++++++++++")
+        print(          "+++++++++++++")
+        print("          ++ VICTORY ++")
+        print("          VVVVVVVVVVVVV")
         displayMap(m)
         print(player, "WON !!", "3 aligned", checkColumns(m)[2], "in the column", checkColumns(m)[1])
+        userNewVictory(player)
         return True
     elif checkDiagonals(m)[0]:
-        print("+++++++++++++")
-        print("++ VICTORY ++")
-        print("+++++++++++++")
+        print("          +++++++++++++")
+        print("          ++ VICTORY ++")
+        print("          VVVVVVVVVVVVV")
         displayMap(m)
         print(player, "WON !!", "3 aligned", checkDiagonals(m)[2], "in the diagonal", checkDiagonals(m)[1])
+        userNewVictory(player)
         return True
     else:
         return False
 
-def initialisation():
+def initialise():
     matrix = [["-","-","-"],["-","-","-"],["-","-","-"]]
-    print("Here's the plateau :")
+    print("Here's the board :")
     displayMap(matrix)
     user1 = str(input("Player 1 - symbol X - Enter your name: "))
     user1 = functions.upperFirstLetter(user1)
@@ -130,14 +154,14 @@ def initialisation():
     return (matrix, user1, user2)
 
 def play():
-    init=initialisation()
+    init=initialise()
     matrix, user1, user2=init[0], init[1], init[2]
 
     t, winner = 1, False
     while t <= 9 and winner == False :
         if t%2 == 0 :
             print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-            print(user2, "it's your turn to play !\nPlace your O")
+            print(t, user2, "it's your turn to play !\nPlace your O")
             displayMap(matrix)
             coordinates = str(input("Enter the two coordinates (between 0 and 2) separated by a space: "))
             l = int(coordinates[0])
@@ -151,7 +175,7 @@ def play():
 
         else:
             print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-            print(user1, "it's your turn to play !\nPlace your X")
+            print(t, user1, "it's your turn to play !\nPlace your X")
             displayMap(matrix)
             coordinates = str(input("Enter the two coordinates (between 0 and 2) separated by a space: "))
             l = int(coordinates[0])
@@ -165,6 +189,14 @@ def play():
             winner = checkWinner(matrix, user1)
 
         t+=1
+    
+    if t == 10:
+        print("      :::::::::::::::::::::")
+        print("      :::  END OF GAME  :::")
+        print("      :::::::::::::::::::::")
+        print("      :::   NO WINNER   :::")
+        print("      :::::::::::::::::::::")
+
 
 
 # ==================== END OF FUNCTIONS
