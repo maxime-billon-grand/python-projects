@@ -40,22 +40,43 @@ def printList(l:list):
     print("|",functions.myUpper(s),"|")
     print("-"*(len(s)+4))
 
+# Define the string of underscores but keeping the -, spaces, ', 
+def defineUnderscores(w:str):
+    s=""
+    for letter in w:
+        match letter:
+            case "-":
+                s += letter
+            case " ":
+                s += letter
+            case "'":
+                s += letter
+            case "!":
+                s += letter
+            case _:
+                s += "_"
+    return s
+
 
 # Initialise and select difficulty
 totalLifes = selectDifficulty()
-lifes = totalLifes
-word = defineWord()
-found = "_"*len(word)
+life = totalLifes
+#word = defineWord()
+word = "avant-garde"
+found = defineUnderscores(word)
 foundList = list(found)
 
-print(word)
 
+# Uncomment theses lines to debug
+#print(word)
+#print (found)
+#print(foundList)
 
-while lifes != 0 and "_" in foundList:
+while life != 0 and "_" in foundList:
     letter = str(input("Please enter a letter : "))
     letter = functions.myLower(letter)
     if letter in word:
-        print("Gagné")
+        print("Nice ! You found a letter")
         i=0
         for l in word:
             if letter == l:
@@ -63,6 +84,14 @@ while lifes != 0 and "_" in foundList:
             i+=1
         printList(foundList)
     else:
-        lifes -= 1
-        print("Perdu")
+        life -= 1
+        print("Oh crap ! This letter is not in the word ")
         printList(foundList)
+
+# Message if all lives are consummed
+if life == 0:
+    print("      :::::::::::::::::::::")
+    print("      :::   GAME OVER   :::")
+    print("      :::::::::::::::::::::")
+    print("      :::   YOU LOOSE   :::")
+    print("      :::::::::::::::::::::")

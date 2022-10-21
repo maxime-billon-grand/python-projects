@@ -116,7 +116,7 @@ def userNewVictory(user:str):
             # Re-put in one big string, and re-write it in the file
             f.write(user+","+victories+","+nbrMatchs+"\n")
 
-# Function displaying the scores with some format
+# Function displaying the scores with some formatting
 def seeScores():
     print(" //===============\\\\")
     print("||   SCORE BOARD   ||")
