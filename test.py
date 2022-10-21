@@ -7,5 +7,5 @@ matrix = [["O","X","-"],["-","-","-"],["-","-","-"]]
 
 a = ["SaLuT", "abcd", "efgh"]
 print(a[1][:-1])
-
-functions.userNewVictory("Julie")
+r=list(range(1,4))
+print(r)

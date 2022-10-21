@@ -161,7 +161,7 @@ def play():
     while t <= 9 and winner == False :
         if t%2 == 0 :
             print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-            print(t, user2, "it's your turn to play !\nPlace your O")
+            print(user2, "it's your turn to play !\nPlace your O")
             displayMap(matrix)
             coordinates = str(input("Enter the two coordinates (between 0 and 2) separated by a space: "))
             l = int(coordinates[0])
@@ -196,7 +196,6 @@ def play():
         print("      :::::::::::::::::::::")
         print("      :::   NO WINNER   :::")
         print("      :::::::::::::::::::::")
-
 
 
 # ==================== END OF FUNCTIONS

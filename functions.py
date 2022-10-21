@@ -3,8 +3,7 @@ def searchLetterInList(letter:str, list:list):
     i,j = 0,0
     for l in list:
         if l == letter:
-            j=i
-            i+=1  
+            j=i  
         i+=1
     return j
 
@@ -64,3 +63,19 @@ def upperFirstLetter(s:str):
         s2 += e
     return s2  
 
+def removeAccents(s:str):
+    accents=["é","è","à","ç","ù"]
+    withoutaccents=["e","e","a","c","u"]
+    l = list(s)                         # Place str in a list
+    j=0
+    for letter in s:
+    
+        if letter in accents:
+            i = searchLetterInList(letter, accents)
+            l[j] = withoutaccents[i]
+        j+=1
+
+    s2 = ""
+    for e in l:                         # Recreate the str from the list
+        s2 += e
+    return s2
