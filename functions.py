@@ -42,6 +42,7 @@ def myLower(s:str):
         s2 += e                     
     return s2
 
+#==============Function CAPTIALIZE======================
 def upperFirstLetter(s:str):
     upper=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç","À","É","È"]
     lower=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ç","à","é","è"]
@@ -63,6 +64,7 @@ def upperFirstLetter(s:str):
         s2 += e
     return s2  
 
+#==============Remove accents and special caracteres
 def removeAccents(s:str):
     accents=["é","è","ê","à","â","ç","î","ù","û","Â","É","È","Ç","'","-"]
     withoutaccents=["e","e","e","a","a","c","i","u","u","A","E","E","C","",""]
@@ -79,3 +81,4 @@ def removeAccents(s:str):
     for e in l:                         # Recreate the str from the list
         s2 += e
     return s2
+

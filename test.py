@@ -7,5 +7,5 @@ matrix = [["O","X","-"],["-","-","-"],["-","-","-"]]
 
 print(functions.removeAccents("avant-garde"))
 matrix = [["O","X","-"],["-","-","-"],["-","-","-"]]
-print(matrix[0][0])
+print(functions.askCoordinates(matrix))
 
