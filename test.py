@@ -8,4 +8,4 @@ matrix = [["O","X","-"],["-","-","-"],["-","-","-"]]
 a = ["SaLuT", "abcd", "efgh"]
 print(a[1][:-1])
 
-functions.checkUser("Rod")
+functions.checkUser("Julie")

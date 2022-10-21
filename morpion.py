@@ -37,11 +37,29 @@ def checkCoordinates(m:list, l:int, c:int):
             l = int(coord[0])
             c = int(coord[2])
 
-def checkUser(user:str):
-    found=False
-    for l in open("./scores.txt", "a"):
-        player = l[0]
-        print(l[0])
+def userNewGame(user:str):
+
+    with open("./scores.txt", "r+") as f:
+        
+        t=f.read()
+        #print(t)
+        listlines=t.split("\n")
+        #print(listlines)
+
+        if user in t:
+            f.seek(0)
+            for line in listlines:
+                if user not in line and line != "":
+                    f.write(line+"\n")
+                elif user in line:
+                    victories=line.split(",")[1]
+                    nbrMatchs=line.split(",")[2]
+                    nbrMatchs=str(int(nbrMatchs)+1)
+                    #print("nbrMatchs=",nbrMatchs)
+
+            f.write(user+","+victories+","+nbrMatchs+"\n")
+        else:
+            f.write(user+",0,1\n")
 
 def seeScores():
     print(" //===============\\\\")
@@ -99,16 +117,21 @@ def checkWinner(m:list, player:str):
     else:
         return False
 
-def play():
+def initialisation():
     matrix = [["-","-","-"],["-","-","-"],["-","-","-"]]
     print("Here's the plateau :")
     displayMap(matrix)
     user1 = str(input("Player 1 - symbol X - Enter your name: "))
     user1 = functions.upperFirstLetter(user1)
+    userNewGame(user1)
     user2 = str(input("Player 2 - symbol O - Enter your name: "))
     user2 = functions.upperFirstLetter(user2)
+    userNewGame(user2)
+    return (matrix, user1, user2)
 
-    # Write in the score.txt if new player or gamesplayed+=1 if player already known
+def play():
+    init=initialisation()
+    matrix, user1, user2=init[0], init[1], init[2]
 
     t, winner = 1, False
     while t <= 9 and winner == False :

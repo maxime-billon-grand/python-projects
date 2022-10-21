@@ -65,21 +65,28 @@ def upperFirstLetter(s:str):
     return s2  
 
 def checkUser(user:str):
-    found=False
 
     with open("./scores.txt", "r+") as f:
         
         t=f.read()
         print(t)
-        d=t.split("\n")
-        print(d)
+        listlines=t.split("\n")
+        print(listlines)
 
 
         if user in t:
             f.seek(0)
-            for i in d:
-                if user not in i and i != "":
-                    f.write(i+"\n")
-            f.write(user+",V,PJ+1\n")
+            for line in listlines:
+                if user not in line and line != "":
+                    f.write(line+"\n")
+                elif user in line:
+                    victories=line.split(",")[1]
+                    nbrMatchs=line.split(",")[2]
+                    nbrMatchs=str(int(nbrMatchs)+1)
+                    print("nbrMatchs=",nbrMatchs)
+
+            f.write(user+","+victories+","+nbrMatchs+"\n")
+        else:
+            f.write(user+",0,1\n")
         
     

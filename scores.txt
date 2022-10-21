@@ -1,3 +1,4 @@
+Nico,6,3
+Rod,7,3
 Max,8,10
-Nico,6,10
-Rod,V,PJ+1
+Julie,0,1
