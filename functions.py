@@ -64,8 +64,8 @@ def upperFirstLetter(s:str):
     return s2  
 
 def removeAccents(s:str):
-    accents=["é","è","à","ç","ù"]
-    withoutaccents=["e","e","a","c","u"]
+    accents=["é","è","ê","à","â","ç","î","ù","û","Â","É","È","Ç","'","-"]
+    withoutaccents=["e","e","e","a","a","c","i","u","u","A","E","E","C","",""]
     l = list(s)                         # Place str in a list
     j=0
     for letter in s:

@@ -1,3 +1,7 @@
+import random
+import functions
+
+# Asking the difficulty until a valid value is entered, define the number of lifes
 def selectDifficulty():
     difficulty=0
     while type(difficulty) is not int or difficulty not in range(1,4) :
@@ -16,6 +20,48 @@ def selectDifficulty():
     
     return lifes
 
+# Open the file dico_france.txt, put the lines in a list, then choose one randomly, remove accents, put in lowercase
+def defineWord():
+    file=open("./dico_france.txt","r")
+    lines=file.readlines()
+    word = random.choice(lines)
+    word = functions.removeAccents(word)[:-1]
+    word = functions.myLower(word)
+    file.close()
 
-lifes = selectDifficulty()
-print(lifes)
+    return word
+
+# Print a list as a string
+def printList(l:list):
+    s=""
+    for e in l:
+        s += e
+    print(":"*)
+    print(s)
+
+
+# Initialise and select difficulty
+totalLifes = selectDifficulty()
+lifes = totalLifes
+word = defineWord()
+found = "_"*len(word)
+foundList = list(found)
+
+#print(word)
+
+
+while lifes != 0 and "_" in foundList:
+    letter = str(input("Please enter a letter : "))
+    letter = functions.myLower(letter)
+    if letter in word:
+        print("Gagné")
+        i=0
+        for l in word:
+            if letter == l:
+                foundList[i] = letter
+            i+=1
+        printList(foundList)
+    else:
+        lifes -= 1
+        print("Perdu")
+        printList(foundList)

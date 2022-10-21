@@ -1,7 +1,7 @@
 # Tic Tac Toe ou "Jeu du morpion" in french
 #
-# [[-,-,-]
-#  [-,-,-]
+# [[-,-,-],
+#  [-,-,-],
 #  [-,-,-]]
 #
 
@@ -64,9 +64,9 @@ def userNewVictory(user:str):
     with open("./scores.txt", "r+") as f:
         
         t=f.read()
-        print(t)
+        #print(t)
         listlines=t.split("\n")
-        print(listlines)
+        #print(listlines)
 
         if user in t:
             f.seek(0)
@@ -175,7 +175,7 @@ def play():
 
         else:
             print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-            print(t, user1, "it's your turn to play !\nPlace your X")
+            print(user1, "it's your turn to play !\nPlace your X")
             displayMap(matrix)
             coordinates = str(input("Enter the two coordinates (between 0 and 2) separated by a space: "))
             l = int(coordinates[0])
