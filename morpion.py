@@ -240,6 +240,7 @@ def play():
 
         round +=1
     
+    # Message if end game
     if round == 10:
         print("      :::::::::::::::::::::")
         print("      :::  END OF GAME  :::")
