@@ -36,8 +36,9 @@ def printList(l:list):
     s=""
     for e in l:
         s += e
-    print(":"*)
-    print(s)
+    print("-"*(len(s)+4))
+    print("|",functions.myUpper(s),"|")
+    print("-"*(len(s)+4))
 
 
 # Initialise and select difficulty
@@ -47,7 +48,7 @@ word = defineWord()
 found = "_"*len(word)
 foundList = list(found)
 
-#print(word)
+print(word)
 
 
 while lifes != 0 and "_" in foundList:
