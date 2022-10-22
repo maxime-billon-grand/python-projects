@@ -20,6 +20,28 @@ def selectDifficulty():
     
     return lifes
 
+# Message if win
+def winMessage():
+    print("      :::::::::::::::::::::")
+    print("      :: CONGRATULATIONS ::")
+    print("      :::::::::::::::::::::")
+    print("      :::    YOU WIN    :::")
+    print("      :::::::::::::::::::::")
+
+# Message if game over
+def looseMessage():
+    print("      ||________________")
+    print("      ||  /            |")
+    print("      || /             O")
+    print("      ||/             /|\\")
+    print("      ||              / \\")
+    print("      ||")
+    print("      =====================")
+    print("      :::::::::::::::::::::")
+    print("      :::   GAME OVER   :::")
+    print("      :::   YOU LOOSE   :::")
+    print("      :::::::::::::::::::::")
+
 # Open the file dico_france.txt, put the lines in a list, then choose one randomly, remove accents, put in lowercase
 def defineWord():
     file=open("./dico_france.txt","r")
@@ -34,11 +56,12 @@ def defineWord():
 # Print a list as a string
 def printList(l:list):
     s=""
+    spaces="     "
     for e in l:
         s += e
-    print("-"*(len(s)+4))
-    print("|",functions.myUpper(s),"|")
-    print("-"*(len(s)+4))
+    print(spaces,"-"*(len(s)+4))
+    print(spaces,"|",functions.myUpper(s),"|")
+    print(spaces,"-"*(len(s)+4))
 
 # Define the string of underscores but keeping the -, spaces, ', 
 def defineUnderscores(w:str):
@@ -61,8 +84,7 @@ def defineUnderscores(w:str):
 # Initialise and select difficulty
 totalLifes = selectDifficulty()
 life = totalLifes
-#word = defineWord()
-word = "avant-garde"
+word = defineWord()
 found = defineUnderscores(word)
 foundList = list(found)
 
@@ -71,7 +93,7 @@ foundList = list(found)
 #print(word)
 #print (found)
 #print(foundList)
-
+printList(foundList)
 while life != 0 and "_" in foundList:
     letter = str(input("Please enter a letter : "))
     letter = functions.myLower(letter)
@@ -86,12 +108,12 @@ while life != 0 and "_" in foundList:
     else:
         life -= 1
         print("Oh crap ! This letter is not in the word ")
+        print("You have", life, "lives left")
         printList(foundList)
 
 # Message if all lives are consummed
 if life == 0:
-    print("      :::::::::::::::::::::")
-    print("      :::   GAME OVER   :::")
-    print("      :::::::::::::::::::::")
-    print("      :::   YOU LOOSE   :::")
-    print("      :::::::::::::::::::::")
+    looseMessage()
+elif "_" not in foundList:
+    winMessage()
+
